@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Incredible India | Tourism of India</title>
 
-  <!-- SEO -->
   <meta name="description" content="Explore the best tourism destinations in India including Taj Mahal, Kerala, Goa, Rajasthan and more. Book amazing travel packages.">
   <meta name="keywords" content="India tourism, travel India, Goa, Kerala, Taj Mahal, Rajasthan tour">
   <meta name="author" content="Tourism of India">
 
-  <!-- Favicon -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/684/684908.png">
 
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,7 +30,6 @@
       overflow-x: hidden;
     }
 
-    /* ================= NAVBAR ================= */
     .navbar {
       background: #1a472a;
       padding: 1rem 2rem;
@@ -81,7 +77,6 @@
       cursor: pointer;
     }
 
-    /* ================= HERO SECTION ================= */
     .hero {
       min-height: 90vh;
       background: linear-gradient(135deg, #1a472a, #0e2e1c);
@@ -188,7 +183,6 @@
       transform: translateX(5px);
     }
 
-    /* ================= CATEGORIES ================= */
     .categories, .highlights {
       padding: 4rem 2rem;
     }
@@ -235,7 +229,6 @@
       color: #1a472a;
     }
 
-    /* ================= CTA SECTION ================= */
     .cta-section {
       background: linear-gradient(135deg, #ffb347, #ff8c00);
       padding: 4rem 2rem;
@@ -266,7 +259,6 @@
       transform: scale(1.05);
     }
 
-    /* ================= MODAL ================= */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -389,7 +381,6 @@
       margin-top: 10px;
     }
 
-    /* ================= FOOTER ================= */
     .footer {
       background: #1a2a1f;
       color: #c9d1b7;
@@ -460,7 +451,6 @@
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
   <div class="nav-container">
     <div class="logo">
@@ -481,7 +471,6 @@
   </div>
 </nav>
 
-<!-- ================= HERO SECTION ================= -->
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-slider">
@@ -523,36 +512,34 @@
   </div>
 </section>
 
-<!-- ================= CATEGORIES ================= -->
 <section class="categories">
   <div class="container">
     <h2 class="section-title">Explore by <span>Category</span></h2>
     <div class="categories-grid">
       <div class="category-card" data-place="Wildlife Sanctuaries">
-        <img src="images/wildlife.jpg" alt="Wildlife">
+        <img src="wildlife.jpg" alt="Wildlife">
         <h3>🐯 Wildlife</h3>
       </div>
       <div class="category-card" data-place="Heritage Sites">
-        <img src="images/heritage1.jpg" alt="Heritage">
+        <img src="heritage1.jpg" alt="Heritage">
         <h3>🏛️ Heritage</h3>
       </div>
       <div class="category-card" data-place="Adventure Sports">
-        <img src="images/adventure.jpg" alt="Adventure">
+        <img src="adventure.jpg" alt="Adventure">
         <h3>🧗 Adventure</h3>
       </div>
       <div class="category-card" data-place="Beach Destinations">
-        <img src="images/beachGoa.jpg" alt="Beach">
+        <img src="beachGoa.jpg" alt="Beach">
         <h3>🏖️ Beach</h3>
       </div>
       <div class="category-card" data-place="Hill Stations">
-        <img src="images/hillsstation.jpg" alt="Hill Stations">
+        <img src="hillsstation.jpg" alt="Hill Stations">
         <h3>🏔️ Hill Stations</h3>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= HIGHLIGHTS ================= -->
 <section class="highlights">
   <div class="container">
     <h2 class="section-title">Popular <span>Destinations</span></h2>
@@ -585,14 +572,12 @@
   </div>
 </section>
 
-<!-- ================= CALL TO ACTION ================= -->
 <section class="cta-section">
   <h2>Ready to Explore Incredible India?</h2>
   <p>Book your dream vacation today and get exclusive discounts!</p>
   <a href="package.html" class="btn-cta">Book Now <i class="fas fa-calendar-check"></i></a>
 </section>
 
-<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-col">
@@ -619,7 +604,6 @@
   </div>
 </footer>
 
-<!-- ================= MODAL ================= -->
 <div id="placeModal" class="modal-overlay">
   <div class="modal-container">
     <div class="modal-header">
@@ -652,10 +636,9 @@
 </div>
 
 <script>
-  // ================= PLACES DATABASE =================
   const placesData = {
     "Taj Mahal": {
-      img: "images/tajmahal.jpg",
+      img: "tajmahal.jpg",
       desc: "The Taj Mahal, an ivory-white marble mausoleum, was commissioned by Shah Jahan in 1632. It's one of the Seven Wonders of the World and a UNESCO World Heritage Site.",
       bestTime: "October to March",
       entryFee: "₹50 (Indians) / ₹1100 (Foreigners)",
@@ -663,7 +646,7 @@
       highlights: "Mughal architecture, Yamuna river view, Mehtab Bagh, Sunrise view"
     },
     "Kerala Backwaters": {
-      img: "images/kerala-backwaters.jpg",
+      img: "kerala-backwaters.jpg",
       desc: "The backwaters of Kerala are a network of brackish lagoons and lakes. Experience tranquility aboard a traditional houseboat.",
       bestTime: "September to March",
       entryFee: "Houseboat packages start at ₹4000",
@@ -671,7 +654,7 @@
       highlights: "Houseboat cruise, fresh seafood, ayurveda, paddy fields"
     },
     "Goa Beaches": {
-      img: "images/beachGoa.jpg",
+      img: "beachGoa.jpg",
       desc: "Goa is famous for stunning beaches like Baga, Calangute, and Palolem. From water sports to Portuguese architecture, Goa offers perfect blend of relaxation and adventure.",
       bestTime: "November to February",
       entryFee: "Free entry to public beaches",
@@ -679,7 +662,7 @@
       highlights: "Water sports, beach shacks, night markets, Portuguese churches"
     },
     "Himalayas": {
-      img: "images/himalayas.jpg",
+      img: "himalayas.jpg",
       desc: "The Himalayas are home to some of the highest peaks in the world. Perfect for trekking, spiritual retreats, and breathtaking views.",
       bestTime: "April to June, September to November",
       entryFee: "Varies by location",
@@ -687,7 +670,7 @@
       highlights: "Trekking, mountain views, monasteries, adventure activities"
     },
     "Rajasthan Desert": {
-      img: "images/rajasthanfort.jpg",
+      img: "rajasthanfort.jpg",
       desc: "Rajasthan offers royal palaces, desert safaris, and rich cultural heritage. Experience the vibrant colors of India.",
       bestTime: "October to March",
       entryFee: "Fort entry varies",
@@ -695,7 +678,7 @@
       highlights: "Desert safari, camel ride, royal palaces, folk dance"
     },
     "Varanasi Ghats": {
-      img: "images/Spiritual.jpg",
+      img: "Spiritual.jpg",
       desc: "Varanasi, situated on the banks of River Ganga, is one of the oldest living cities. The Ganga Aarti is a mesmerizing spiritual experience.",
       bestTime: "October to March",
       entryFee: "Free, boat ride ~₹300",
@@ -703,7 +686,7 @@
       highlights: "Ganga Aarti, boat ride, narrow alleyways, temples"
     },
     "Wildlife Sanctuaries": {
-      img: "images/wildlife.jpg",
+      img: "wildlife.jpg",
       desc: "India's wildlife sanctuaries are home to tigers, elephants, rhinos, and diverse flora and fauna.",
       bestTime: "October to March",
       entryFee: "₹100-₹500",
@@ -711,7 +694,7 @@
       highlights: "Jungle safari, tiger spotting, bird watching, nature trails"
     },
     "Heritage Sites": {
-      img: "images/heritage1.jpg",
+      img: "heritage1.jpg",
       desc: "India's heritage sites showcase ancient architecture, historical monuments, and rich cultural history.",
       bestTime: "October to March",
       entryFee: "Varies by monument",
@@ -719,7 +702,7 @@
       highlights: "Historical monuments, architecture, photography, cultural tours"
     },
     "Adventure Sports": {
-      img: "images/adventure.jpg",
+      img: "adventure.jpg",
       desc: "Experience thrilling adventure activities like river rafting, paragliding, bungee jumping, and trekking.",
       bestTime: "September to June",
       entryFee: "Activity-based pricing",
@@ -727,7 +710,7 @@
       highlights: "River rafting, paragliding, trekking, camping, rock climbing"
     },
     "Beach Destinations": {
-      img: "images/beachGoa.jpg",
+      img: "beachGoa.jpg",
       desc: "India's beaches offer sun, sand, water sports, and relaxing coastal experiences.",
       bestTime: "November to February",
       entryFee: "Free",
@@ -735,7 +718,7 @@
       highlights: "Swimming, water sports, sunset views, beach shacks"
     },
     "Hill Stations": {
-      img: "images/hillsstation.jpg",
+      img: "hillsstation.jpg",
       desc: "Escape to India's beautiful hill stations with cool climate, scenic views, and peaceful surroundings.",
       bestTime: "March to June",
       entryFee: "Free",
@@ -744,10 +727,9 @@
     }
   };
 
-  // ================= MODAL FUNCTION =================
   function getGenericInfo(placeName) {
     return {
-      img: "images/india-tourism.jpg",
+      img: "tajmahal.jpg",
       desc: `${placeName} is a beautiful tourist destination in India. Enjoy local culture, scenic views, and memorable experiences. Book your visit today!`,
       bestTime: "October to March",
       entryFee: "Varies by location",
@@ -790,7 +772,6 @@
     modal.classList.remove('active');
   }
 
-  // ================= BOOKING HANDLER =================
   document.getElementById('confirmBooking').addEventListener('click', () => {
     const name = document.getElementById('visitorName').value;
     const email = document.getElementById('visitorEmail').value;
@@ -825,7 +806,6 @@
     document.getElementById('travelDate').value = '';
   });
 
-  // ================= CLICK HANDLERS =================
   document.querySelectorAll('.highlight-card, .category-card').forEach(card => {
     card.addEventListener('click', () => {
       const placeName = card.getAttribute('data-place') || card.querySelector('h3')?.innerText.replace(/[🐯🏛️🧗🏖️🏔️]/g, '').trim();
@@ -841,7 +821,6 @@
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
   });
 
-  // ================= AUTO SLIDER =================
   let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   const dotsContainer = document.getElementById('sliderDots');
@@ -872,7 +851,6 @@
   createDots();
   setInterval(nextSlide, 4000);
   
-  // ================= HAMBURGER MENU =================
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
   
@@ -880,7 +858,6 @@
     navLinks.classList.toggle('show');
   });
   
-  // ================= ACTIVE NAV LINK =================
   const currentPage = window.location.pathname.split("/").pop();
   document.querySelectorAll('.nav-links a').forEach(link => {
     if(link.getAttribute('href') === currentPage || (currentPage === "" && link.getAttribute('href') === "index.html")) {
