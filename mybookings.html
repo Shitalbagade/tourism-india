@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Bookings | Tourism of India</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #fef9f0; }
+.navbar { background: #1a472a; padding: 1rem 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.navbar a { color: #ffebc2; text-decoration: none; font-weight: 600; }
+.navbar a:hover, .navbar a.active { color: #ffb347; }
+.header { text-align: center; padding: 2rem; background: linear-gradient(135deg, #2b5e3b, #1a472a); color: white; }
+.container { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+.search-box { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+.search-box input { padding: 12px 20px; border-radius: 30px; border: 1px solid #ddd; width: 300px; }
+.search-box button { padding: 12px 25px; background: #ffb347; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; }
+.booking-card { background: white; border-radius: 15px; padding: 1rem; margin-bottom: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.booking-info h3 { color: #1a472a; margin-bottom: 5px; }
+.booking-info p { color: #666; font-size: 0.9rem; margin: 3px 0; }
+.booking-status { background: #d4edda; color: #155724; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
+footer { text-align: center; padding: 1.5rem; background: #1a2a1f; color: #c9d1b7; margin-top: 2rem; }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="places.html">Places</a>
+  <a href="packages.html">Packages</a>
+  <a href="mybookings.html" class="active">My Bookings</a>
+</div>
+
+<div class="header">
+  <h1><i class="fas fa-ticket-alt"></i> My Bookings</h1>
+  <p>View all your confirmed bookings</p>
+</div>
+
+<div class="container">
+  <div class="search-box">
+    <input type="email" id="emailInput" placeholder="Enter your email to view bookings">
+    <button onclick="viewBookings()"><i class="fas fa-search"></i> View My Bookings</button>
+  </div>
+  <div id="bookingsList"></div>
+</div>
+
+<footer>
+  <p>© 2025 Tourism of India | Your Trusted Travel Partner</p>
+</footer>
+
+<script>
+  function viewBookings() {
+    const email = document.getElementById('emailInput').value.trim();
+    if(!email) {
+      alert('Please enter your email address');
+      return;
+    }
+    
+    const placeBookings = JSON.parse(localStorage.getItem('tourism_bookings') || '[]');
+    const packageBookings = JSON.parse(localStorage.getItem('tourism_package_bookings') || '[]');
+    
+    const userPlaceBookings = placeBookings.filter(b => b.userEmail === email);
+    const userPackageBookings = packageBookings.filter(b => b.userEmail === email);
+    const allBookings = [...userPlaceBookings, ...userPackageBookings].sort((a,b) => new Date(b.bookingDate) - new Date(a.bookingDate));
+    
+    const container = document.getElementById('bookingsList');
+    
+    if(allBookings.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:2rem; background:white; border-radius:15px;">📭 No bookings found for this email. Please check your email or make a booking.</div>';
+      return;
+    }
+    
+    container.innerHTML = allBookings.map(booking => {
+      const isPlace = booking.placeName !== undefined;
+      return `
+        <div class="booking-card">
+          <div class="booking-info">
+            <h3><i class="fas ${isPlace ? 'fa-map-marker-alt' : 'fa-suitcase'}"></i> ${isPlace ? booking.placeName : booking.packageName}</h3>
+            <p><i class="fas fa-user"></i> ${booking.userName}</p>
+            <p><i class="fas fa-calendar"></i> Travel Date: ${booking.travelDate}</p>
+            <p><i class="fas fa-users"></i> ${isPlace ? booking.seats : booking.travelers} ${isPlace ? 'Seats' : 'Travelers'}</p>
+            <p><i class="fas fa-rupee-sign"></i> Total: ₹${(booking.totalAmount || 0).toLocaleString()}</p>
+            <p><i class="fas fa-clock"></i> Booked on: ${new Date(booking.bookingDate).toLocaleDateString()}</p>
+          </div>
+          <div class="booking-status">
+            <i class="fas fa-check-circle"></i> Confirmed
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+</script>
+</body>
+</html>

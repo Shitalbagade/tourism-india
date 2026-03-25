@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register & Login | Tourism of India</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="database.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(135deg, #1a472a, #0e2e1c);
+  }
+
+  /* Animated Background */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.pexels.com/photos/258117/pexels-photo-258117.jpeg?auto=compress&cs=tinysrgb&w=1200') no-repeat center center/cover;
+    opacity: 0.3;
+    z-index: -1;
+    animation: zoomBg 20s infinite alternate;
+  }
+
+  @keyframes zoomBg {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
+
+  /* Main Container */
+  .auth-container {
+    display: flex;
+    max-width: 1000px;
+    width: 90%;
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Left Side - Info Section */
+  .info-section {
+    background: linear-gradient(135deg, #1a472a, #2b5e3b);
+    padding: 3rem 2rem;
+    width: 40%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .info-section .features {
+    text-align: left;
+    margin-top: 1rem;
+  }
+
+  .info-section .features li {
+    list-style: none;
+    margin: 0.8rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .info-section .features li i {
+    width: 25px;
+    color: #ffb347;
+  }
+
+  /* Right Side - Forms */
+  .form-section {
+    width: 60%;
+    padding: 2.5rem;
+    background: white;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .form-header h3 {
+    font-size: 1.8rem;
+    color: #1a472a;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-header p {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  /* Toggle Buttons */
+  .form-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    transition: 0.3s;
+    border-radius: 10px;
+  }
+
+  .tab-btn.active {
+    background: #ffb347;
+    color: white;
+  }
+
+  /* Forms */
+  .form {
+    display: none;
+  }
+
+  .form.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .input-group {
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+
+  .input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffb347;
+    font-size: 1rem;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: #ffb347;
+    box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.1);
+  }
+
+  .input-group.fullname-group {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .input-group.fullname-group div {
+    flex: 1;
+    position: relative;
+  }
+
+  .input-group.fullname-group input {
+    padding-left: 40px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ffb347, #ff8c00);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 0.5rem;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+  }
+
+  /* Social Login */
+  .social-login {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .social-login p {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .social-login p::before,
+  .social-login p::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: #ddd;
+  }
+
+  .social-login p::before {
+    left: 0;
+  }
+
+  .social-login p::after {
+    right: 0;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: 0.3s;
+  }
+
+  .social-icons a:hover {
+    background: #ffb347;
+    color: white;
+    transform: translateY(-3px);
+  }
+
+  /* Message Alert */
+  .message {
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    display: none;
+  }
+
+  .message.success {
+    background: #d4edda;
+    color: #155724;
+    display: block;
+  }
+
+  .message.error {
+    background: #f8d7da;
+    color: #721c24;
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .auth-container {
+      flex-direction: column;
+      width: 95%;
+    }
+    .info-section, .form-section {
+      width: 100%;
+    }
+    .info-section {
+      padding: 2rem;
+      text-align: center;
+    }
+    .input-group.fullname-group {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="auth-container">
+  <!-- Left Side Info -->
+  <div class="info-section">
+    <h2><i class="fas fa-map-marked-alt"></i> Tourism of India</h2>
+    <p>Your gateway to incredible travel experiences across India.</p>
+    <ul class="features">
+      <li><i class="fas fa-check-circle"></i> 250+ Destinations</li>
+      <li><i class="fas fa-check-circle"></i> Customized Packages</li>
+      <li><i class="fas fa-check-circle"></i> 24/7 Travel Support</li>
+      <li><i class="fas fa-check-circle"></i> Best Price Guarantee</li>
+      <li><i class="fas fa-check-circle"></i> Easy Booking & Cancellation</li>
+    </ul>
+  </div>
+
+  <!-- Right Side Forms -->
+  <div class="form-section">
+    <div class="form-header">
+      <h3>Welcome to Tourism of India</h3>
+      <p>Login or Register to start your journey</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="form-tabs">
+      <button class="tab-btn active" onclick="showForm('login')">Login</button>
+      <button class="tab-btn" onclick="showForm('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="form active">
+      <form onsubmit="return false;">
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="loginEmail" placeholder="Email Address" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="loginPassword" placeholder="Password" required>
+        </div>
+        <button type="button" class="btn-submit" onclick="handleLogin()">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <div class="social-login">
+          <p>Or login with</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-google"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-apple"></i></a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="form">
+      <form onsubmit="return false;">
+        <div class="input-group fullname-group">
+          <div>
+            <i class="fas fa-user"></i>
+            <input type="text" id="regFirstName" placeholder="First Name" required>
+          </div>
+          <div>
+            <i class="fas fa-user"></i>
+            <input type="text" id="regLastName" placeholder="Last Name" required>
+          </div>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="regEmail" placeholder="Email Address" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-phone"></i>
+          <input type="tel" id="regPhone" placeholder="Phone Number (Optional)">
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="regPassword" placeholder="Password" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-check-circle"></i>
+          <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <button type="button" class="btn-submit" onclick="handleRegister()">
+          <i class="fas fa-user-plus"></i> Create Account
+        </button>
+        <div class="social-login">
+          <p>Or sign up with</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-google"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-apple"></i></a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div id="messageBox" class="message"></div>
+  </div>
+</div>
+
+<script>
+  // User Database (stored in localStorage)
+  let users = [];
+
+  // Load users from localStorage
+  function loadUsers() {
+    const savedUsers = localStorage.getItem('tourism_users');
+    if(savedUsers) {
+      users = JSON.parse(savedUsers);
+    } else {
+      // Default admin user
+      users = [
+        { id: 1, firstName: 'Admin', lastName: 'User', email: 'admin@tourism.com', password: 'admin123', phone: '', registerDate: new Date().toISOString() }
+      ];
+      saveUsers();
+    }
+  }
+
+  // Save users to localStorage
+  function saveUsers() {
+    localStorage.setItem('tourism_users', JSON.stringify(users));
+  }
+
+  // Show form (Login/Register)
+  function showForm(type) {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const tabs = document.querySelectorAll('.tab-btn');
+    
+    if(type === 'login') {
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+      tabs[0].classList.add('active');
+      tabs[1].classList.remove('active');
+    } else {
+      loginForm.classList.remove('active');
+      registerForm.classList.add('active');
+      tabs[0].classList.remove('active');
+      tabs[1].classList.add('active');
+    }
+    hideMessage();
+  }
+
+  // Show message
+  function showMessage(text, type) {
+    const msgBox = document.getElementById('messageBox');
+    msgBox.textContent = text;
+    msgBox.className = `message ${type}`;
+    setTimeout(() => {
+      msgBox.className = 'message';
+    }, 3000);
+  }
+
+  function hideMessage() {
+    document.getElementById('messageBox').className = 'message';
+  }
+
+  // Handle Registration
+  function handleRegister() {
+    const firstName = document.getElementById('regFirstName').value.trim();
+    const lastName = document.getElementById('regLastName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+    // Validation
+    if(!firstName || !lastName || !email || !password) {
+      showMessage('❌ Please fill all required fields!', 'error');
+      return;
+    }
+
+    if(!email.includes('@') || !email.includes('.')) {
+      showMessage('❌ Please enter a valid email address!', 'error');
+      return;
+    }
+
+    if(password.length < 4) {
+      showMessage('❌ Password must be at least 4 characters long!', 'error');
+      return;
+    }
+
+    if(password !== confirmPassword) {
+      showMessage('❌ Passwords do not match!', 'error');
+      return;
+    }
+
+    // Check if email already exists
+    const existingUser = users.find(u => u.email === email);
+    if(existingUser) {
+      showMessage('❌ Email already registered! Please login.', 'error');
+      return;
+    }
+
+    // Create new user
+    const newUser = {
+      id: users.length + 1,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      phone: phone,
+      registerDate: new Date().toISOString()
+    };
+
+    users.push(newUser);
+    saveUsers();
+
+    showMessage('✅ Registration Successful! Please login.', 'success');
+    
+    // Clear form
+    document.getElementById('regFirstName').value = '';
+    document.getElementById('regLastName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regPhone').value = '';
+    document.getElementById('regPassword').value = '';
+    document.getElementById('regConfirmPassword').value = '';
+    
+    // Switch to login form after 1.5 seconds
+    setTimeout(() => {
+      showForm('login');
+    }, 1500);
+  }
+
+  // Handle Login
+  function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if(!email || !password) {
+      showMessage('❌ Please fill all fields!', 'error');
+      return;
+    }
+
+    // Find user
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if(user) {
+      // Save current user session
+      localStorage.setItem('current_user', JSON.stringify({
+        id: user.id,
+        name: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+        phone: user.phone
+      }));
+      
+      showMessage(`✅ Welcome back, ${user.firstName}! Redirecting...`, 'success');
+      
+      // Redirect to home page after 1 second
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    } else {
+      showMessage('❌ Invalid email or password!', 'error');
+    }
+  }
+
+  // Check if already logged in
+  function checkLoggedIn() {
+    const currentUser = localStorage.getItem('current_user');
+    if(currentUser && window.location.pathname.includes('register.html')) {
+      // If already logged in, redirect to home
+      window.location.href = 'index.html';
+    }
+  }
+
+  // Initialize
+  loadUsers();
+  checkLoggedIn();
+</script>
+</body>
+</html>

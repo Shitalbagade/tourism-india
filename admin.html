@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Tourism of India</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fef9f0;
+}
+.navbar {
+  background: #1a472a;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.navbar a {
+  color: #ffebc2;
+  text-decoration: none;
+  font-weight: 600;
+}
+.navbar a:hover, .navbar a.active {
+  color: #ffb347;
+}
+.header {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #2b5e3b, #1a472a);
+  color: white;
+}
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  padding: 10px 25px;
+  background: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.tab-btn.active {
+  background: #ffb347;
+  color: white;
+}
+.table-container {
+  background: white;
+  border-radius: 20px;
+  overflow-x: auto;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+th {
+  background: #1a472a;
+  color: white;
+}
+tr:hover {
+  background: #f8f4ea;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+.stat-card i {
+  font-size: 2rem;
+  color: #ffb347;
+}
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a472a;
+}
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background: #c82333;
+}
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: #1a2a1f;
+  color: #c9d1b7;
+  margin-top: 2rem;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="places.html">Places</a>
+  <a href="packages.html">Packages</a>
+  <a href="admin.html" class="active">Admin</a>
+</div>
+
+<div class="header">
+  <h1><i class="fas fa-chart-line"></i> Admin Dashboard</h1>
+  <p>Manage Bookings & View Statistics</p>
+</div>
+
+<div class="container">
+  <div class="stats" id="statsContainer"></div>
+  
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('places')">📌 Place Bookings</button>
+    <button class="tab-btn" onclick="showTab('packages')">🎒 Package Bookings</button>
+  </div>
+  
+  <div class="table-container">
+    <table id="bookingsTable">
+      <thead id="tableHeader"></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Tourism of India | Admin Dashboard</p>
+</footer>
+
+<script>
+  let currentTab = 'places';
+  
+  function loadBookings() {
+    // Load place bookings
+    const placeBookings = JSON.parse(localStorage.getItem('tourism_bookings') || '[]');
+    // Load package bookings
+    const packageBookings = JSON.parse(localStorage.getItem('tourism_package_bookings') || '[]');
+    
+    return { placeBookings, packageBookings };
+  }
+  
+  function updateStats() {
+    const { placeBookings, packageBookings } = loadBookings();
+    const totalBookings = placeBookings.length + packageBookings.length;
+    const totalRevenue = [...placeBookings, ...packageBookings].reduce((sum, b) => sum + (b.totalAmount || 0), 0);
+    
+    document.getElementById('statsContainer').innerHTML = `
+      <div class="stat-card">
+        <i class="fas fa-calendar-check"></i>
+        <div class="stat-number">${totalBookings}</div>
+        <div>Total Bookings</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-rupee-sign"></i>
+        <div class="stat-number">₹${totalRevenue.toLocaleString()}</div>
+        <div>Total Revenue</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="stat-number">${placeBookings.length}</div>
+        <div>Place Bookings</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-suitcase"></i>
+        <div class="stat-number">${packageBookings.length}</div>
+        <div>Package Bookings</div>
+      </div>
+    `;
+  }
+  
+  function showTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    renderTable();
+  }
+  
+  function deleteBooking(type, id) {
+    if(confirm('Are you sure you want to delete this booking?')) {
+      if(type === 'places') {
+        let bookings = JSON.parse(localStorage.getItem('tourism_bookings') || '[]');
+        bookings = bookings.filter(b => b.id !== id);
+        localStorage.setItem('tourism_bookings', JSON.stringify(bookings));
+      } else {
+        let bookings = JSON.parse(localStorage.getItem('tourism_package_bookings') || '[]');
+        bookings = bookings.filter(b => b.id !== id);
+        localStorage.setItem('tourism_package_bookings', JSON.stringify(bookings));
+      }
+      renderTable();
+      updateStats();
+    }
+  }
+  
+  function renderTable() {
+    const { placeBookings, packageBookings } = loadBookings();
+    const bookings = currentTab === 'places' ? placeBookings : packageBookings;
+    const isPlaceTab = currentTab === 'places';
+    
+    const thead = document.getElementById('tableHeader');
+    const tbody = document.getElementById('tableBody');
+    
+    if(bookings.length === 0) {
+      thead.innerHTML = '<tr><th>No Bookings Found</th></tr>';
+      tbody.innerHTML = '<tr><td style="text-align:center; padding:2rem;">📭 No bookings yet. Customers will appear here when they book.</td></tr>';
+      return;
+    }
+    
+    if(isPlaceTab) {
+      thead.innerHTML = `
+        <tr>
+          <th>ID</th>
+          <th>Place Name</th>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Seats</th>
+          <th>Travel Date</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      `;
+      tbody.innerHTML = bookings.map(booking => `
+        <tr>
+          <td>#${booking.id}</td>
+          <td><strong>${booking.placeName}</strong></td>
+          <td>${booking.userName}</td>
+          <td>${booking.userEmail}</td>
+          <td>${booking.seats}</td>
+          <td>${booking.travelDate}</td>
+          <td>₹${(booking.totalAmount || booking.seats * 999).toLocaleString()}</td>
+          <td><button class="delete-btn" onclick="deleteBooking('places', ${booking.id})"><i class="fas fa-trash"></i> Delete</button></td>
+        </tr>
+      `).join('');
+    } else {
+      thead.innerHTML = `
+        <tr>
+          <th>ID</th>
+          <th>Package Name</th>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Travelers</th>
+          <th>Travel Date</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      `;
+      tbody.innerHTML = bookings.map(booking => `
+        <tr>
+          <td>#${booking.id}</td>
+          <td><strong>${booking.packageName}</strong></td>
+          <td>${booking.userName}</td>
+          <td>${booking.userEmail}</td>
+          <td>${booking.travelers || booking.seats || 1}</td>
+          <td>${booking.travelDate}</td>
+          <td>₹${(booking.totalAmount || 0).toLocaleString()}</td>
+          <td><button class="delete-btn" onclick="deleteBooking('packages', ${booking.id})"><i class="fas fa-trash"></i> Delete</button></td>
+        </tr>
+      `).join('');
+    }
+  }
+  
+  // Initialize
+  updateStats();
+  renderTable();
+</script>
+</body>
+</html>
