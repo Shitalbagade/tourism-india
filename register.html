@@ -41,6 +41,42 @@
     100% { transform: scale(1.1); }
   }
 
+  /* User Bar - Top Navigation */
+  .user-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: #1a472a;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .user-bar .welcome {
+    color: #ffebc2;
+    font-weight: 500;
+  }
+  .user-bar a {
+    color: #ffb347;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .user-bar a:hover {
+    color: #ff8c00;
+    text-decoration: underline;
+  }
+  .user-bar .logout-btn {
+    color: #ffb347;
+    cursor: pointer;
+  }
+  .user-bar .logout-btn:hover {
+    color: #ff8c00;
+  }
+
   /* Main Container */
   .auth-container {
     display: flex;
@@ -51,6 +87,7 @@
     overflow: hidden;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     backdrop-filter: blur(10px);
+    margin-top: 70px;
   }
 
   /* Left Side - Info Section */
@@ -304,6 +341,7 @@
     .auth-container {
       flex-direction: column;
       width: 95%;
+      margin-top: 80px;
     }
     .info-section, .form-section {
       width: 100%;
@@ -316,10 +354,19 @@
       flex-direction: column;
       gap: 1rem;
     }
+    .user-bar {
+      padding: 8px 15px;
+    }
   }
 </style>
 </head>
 <body>
+
+<!-- User Bar - Shows login status -->
+<div class="user-bar" id="userBar">
+  <span class="welcome" id="welcomeMsg"></span>
+  <a href="#" id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutUser()">🚪 Logout</a>
+</div>
 
 <div class="auth-container">
   <!-- Left Side Info -->
@@ -441,6 +488,46 @@
   // Save users to localStorage
   function saveUsers() {
     localStorage.setItem('tourism_users', JSON.stringify(users));
+  }
+
+  // Get current logged in user
+  function getCurrentUser() {
+    const user = localStorage.getItem('current_user');
+    if(user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
+
+  // Update user bar display
+  function updateUserBar() {
+    const currentUser = getCurrentUser();
+    const welcomeMsg = document.getElementById('welcomeMsg');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    if(currentUser) {
+      welcomeMsg.innerHTML = `👋 Welcome, ${currentUser.name}!`;
+      logoutBtn.style.display = 'inline';
+      // If already logged in and on register page, redirect to home after 1 second
+      if(window.location.pathname.includes('register.html')) {
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 500);
+      }
+    } else {
+      welcomeMsg.innerHTML = `🔐 Not Logged In`;
+      logoutBtn.style.display = 'none';
+    }
+  }
+
+  // Logout function
+  function logoutUser() {
+    localStorage.removeItem('current_user');
+    updateUserBar();
+    showMessage('✅ Logged out successfully!', 'success');
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   // Show form (Login/Register)
@@ -579,15 +666,23 @@
 
   // Check if already logged in
   function checkLoggedIn() {
-    const currentUser = localStorage.getItem('current_user');
+    const currentUser = getCurrentUser();
     if(currentUser && window.location.pathname.includes('register.html')) {
-      // If already logged in, redirect to home
-      window.location.href = 'index.html';
+      // Show message and redirect after 2 seconds
+      const msgBox = document.getElementById('messageBox');
+      if(msgBox) {
+        msgBox.innerHTML = `<div class="message success">✅ You are already logged in as ${currentUser.name}. Redirecting to home page...</div>`;
+        msgBox.className = 'message success';
+      }
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 2000);
     }
   }
 
   // Initialize
   loadUsers();
+  updateUserBar();
   checkLoggedIn();
 </script>
 </body>
