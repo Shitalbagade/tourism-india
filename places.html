@@ -3,816 +3,699 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tour Packages | Tourism of India</title>
+<title>All Tourist Places in India - Book Your Seat</title>
+
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fef9f0;
-  color: #2c3e2f;
-}
-
-.navbar {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  background: #1a472a;
-  padding: 1rem 2rem;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.navbar a {
-  color: #ffebc2;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-  font-size: 1.1rem;
-}
-
-.navbar a:hover, .navbar a.active {
-  color: #ffb347;
-}
-
-.header {
-  text-align: center;
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #2b5e3b, #1a472a);
-  color: white;
-}
-
-.header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-}
-
-.header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 2rem;
-  justify-content: center;
-  background: white;
-  margin: 1rem auto;
-  max-width: 1200px;
-  border-radius: 60px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.filters input, .filters select {
-  padding: 12px 20px;
-  border-radius: 40px;
-  border: 1px solid #ddd;
-  font-family: inherit;
-  font-size: 0.9rem;
-  background: white;
-  cursor: pointer;
-}
-
-.filters input:focus, .filters select:focus {
-  outline: none;
-  border-color: #ffb347;
-}
-
-.popular-banner {
-  background: linear-gradient(135deg, #ffb347, #ff8c00);
-  margin: 0 auto 2rem;
-  max-width: 1200px;
-  border-radius: 30px;
-  padding: 1.5rem;
-  text-align: center;
-}
-
-.popular-banner h3 {
-  color: white;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.popular-banner span {
-  background: white;
-  color: #ff8c00;
-  padding: 0.5rem 1rem;
-  border-radius: 30px;
-  font-weight: bold;
-  display: inline-block;
-}
-
-.section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-}
-
-.section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #1a472a;
-  border-left: 5px solid #ffb347;
-  padding-left: 1rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.tag {
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-}
-
-.tag:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-.package-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.package-content {
-  padding: 1.2rem;
-}
-
-.package-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #1a472a;
-}
-
-.package-price {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #ff8c00;
-  margin: 0.5rem 0;
-}
-
-.package-details {
-  display: flex;
-  gap: 1rem;
-  margin: 0.5rem 0;
-  font-size: 0.8rem;
-  color: #666;
-}
-
-.package-details i {
-  margin-right: 4px;
-  color: #ffb347;
-}
-
-.package-rating {
-  margin-top: 0.5rem;
-  color: #ffc107;
-}
-
-.package-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ffb347;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: bold;
-}
-
-.hide {
-  display: none;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(5px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.modal-overlay.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.modal-container {
-  background: white;
-  max-width: 600px;
-  width: 90%;
-  border-radius: 30px;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: fadeUp 0.3s ease;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fef9f0;
+    color: #2c3e2f;
   }
-}
 
-.modal-header {
-  background: linear-gradient(135deg, #1a472a, #2b5e3b);
-  color: white;
-  padding: 1.2rem 1.8rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 30px 30px 0 0;
-}
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    background: #1a472a;
+    padding: 1rem 2rem;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+  .nav-links li a {
+    text-decoration: none;
+    color: #ffebc2;
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 1.1rem;
+  }
+  .nav-links li a:hover, .nav-links li a.active {
+    color: #ffb347;
+  }
 
-.modal-header h2 {
-  font-size: 1.4rem;
-}
+  .header {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #2b5e3b, #1a472a);
+    color: white;
+  }
+  .header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  .header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
 
-.close-modal {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-}
-
-.modal-body {
-  padding: 1.5rem;
-}
-
-.modal-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 15px;
-  margin-bottom: 1rem;
-}
-
-.modal-duration {
-  display: inline-block;
-  background: #f0f2e8;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.modal-price {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #ff8c00;
-  margin: 1rem 0;
-}
-
-.inclusion-list {
-  background: #f8f4ea;
-  padding: 1rem;
-  border-radius: 15px;
-  margin: 1rem 0;
-}
-
-.inclusion-list h4 {
-  margin-bottom: 0.5rem;
-  color: #1a472a;
-}
-
-.inclusion-list ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.inclusion-list li {
-  padding: 4px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.inclusion-list li i {
-  color: #28a745;
-  width: 20px;
-}
-
-.booking-form input, .booking-form select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-
-.book-btn {
-  background: #ffb347;
-  border: none;
-  padding: 12px;
-  font-weight: bold;
-  border-radius: 30px;
-  width: 100%;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: 0.3s;
-}
-
-.book-btn:hover {
-  background: #e67e22;
-  color: white;
-}
-
-.success-msg {
-  background: #d4edda;
-  color: #155724;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.error-msg {
-  background: #f8d7da;
-  color: #721c24;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  margin-top: 10px;
-}
-
-footer {
-  text-align: center;
-  background: #1a2a1f;
-  color: #c9d1b7;
-  padding: 1.5rem;
-  margin-top: 2rem;
-}
-
-@media (max-width: 700px) {
-  .filters {
-    flex-direction: column;
-    border-radius: 20px;
+  .section {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  }
+  .section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1a472a;
+    border-left: 5px solid #ffb347;
+    padding-left: 1rem;
   }
   .grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
   }
-}
+  .tag {
+    background: #f0f2e8;
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c3e2f;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    display: inline-block;
+  }
+  .tag:hover {
+    background: #ffb347;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-color: #ffb347;
+  }
+
+  .rating {
+    text-align: center;
+    margin: 2rem 0 1rem;
+    font-size: 1.8rem;
+  }
+  .rating span {
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-block;
+  }
+  .rating span:hover {
+    transform: scale(1.2);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  .modal-container {
+    background: #fffef7;
+    max-width: 800px;
+    width: 90%;
+    border-radius: 32px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: fadeUp 0.3s ease;
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .modal-header {
+    background: linear-gradient(135deg, #1a472a, #2b5e3b);
+    color: white;
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 32px 32px 0 0;
+  }
+  .modal-header h2 {
+    font-size: 1.6rem;
+    margin: 0;
+  }
+  .close-modal {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .close-modal:hover {
+    color: #ffb347;
+    transform: scale(1.1);
+  }
+  .modal-body {
+    padding: 1.8rem;
+  }
+  .place-detail-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+  }
+  .detail-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2d3e2c;
+    margin: 1rem 0;
+  }
+  .info-grid {
+    background: #f8f4ea;
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 0.8rem;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .info-item i {
+    color: #ffb347;
+    width: 28px;
+    font-size: 1.1rem;
+  }
+  .booking-form {
+    margin-top: 1.5rem;
+    border-top: 2px dashed #e0d6c0;
+    padding-top: 1.5rem;
+  }
+  .booking-form h3 {
+    color: #1a472a;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2c3e2f;
+  }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    font-family: inherit;
+    background: white;
+  }
+  .book-btn {
+    background: #ffb347;
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 50px;
+    color: #1a472a;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+    margin-top: 10px;
+  }
+  .book-btn:hover {
+    background: #e67e22;
+    color: white;
+  }
+  .success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 50px;
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 600;
+  }
+  .error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 50px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  footer {
+    text-align: center;
+    background: #1a2a1f;
+    color: #c9d1b7;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 700px) {
+    .nav-links {
+      gap: 1rem;
+    }
+    .section {
+      padding: 1rem;
+    }
+    .tag {
+      font-size: 0.8rem;
+      padding: 0.4rem 1rem;
+    }
+  }
 </style>
 </head>
+
 <body>
 
-<div class="navbar">
-  <a href="index.html">Home</a>
-  <a href="places.html">Places</a>
-  <a href="packages.html" class="active">Packages</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="register.html">Register</a>
-</div>
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="about.html">About</a></li>  
+  <li><a href="places.html" class="active">Places</a></li>
+  <li><a href="package.html">Packages</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <li><a href="register.html">Register</a></li>
+</ul>
 
 <div class="header">
-  <h1>💼 Tour Packages</h1>
-  <p>Explore 100+ Customized Packages Across India | Book Your Dream Vacation!</p>
+  <h1>🇮🇳 Explore 250+ Tourist Places in India</h1>
+  <p>✨ Click on ANY place — Get complete details & book your seat instantly! ✨</p>
 </div>
 
-<div class="filters">
-  <input type="text" id="search" placeholder="🔍 Search packages...">
-  <select id="budget">
-    <option value="">💰 All Budgets</option>
-    <option value="low">₹5,000 - ₹10,000</option>
-    <option value="mid">₹10,000 - ₹20,000</option>
-    <option value="pre">₹20,000 - ₹30,000</option>
-    <option value="high">₹30,000+</option>
-  </select>
-  <select id="type">
-    <option value="">🏷️ All Types</option>
-    <option value="hill">🏔️ Hill Station</option>
-    <option value="beach">🏖️ Beach</option>
-    <option value="adventure">🧗 Adventure</option>
-    <option value="spiritual">🛕 Spiritual</option>
-    <option value="tour">🚌 Tour Package</option>
-  </select>
-  <select id="days">
-    <option value="">📅 Duration</option>
-    <option value="short">1-3 Days</option>
-    <option value="mid">3-5 Days</option>
-    <option value="long">5-7 Days</option>
-  </select>
-</div>
-
-<div class="popular-banner">
-  <h3>⭐ Most Popular Packages This Month ⭐</h3>
-  <span>Manali • Goa • Kashmir • Ladakh • Andaman</span>
-</div>
-
+<!-- ================= HILL STATIONS ================= -->
 <div class="section">
-  <h2><i class="fas fa-tag"></i> All Packages</h2>
-  <div class="grid" id="packagesGrid"></div>
+<h2>🏔️ Hill Stations (50+)</h2>
+<div class="grid">
+  <div class="tag">Shimla</div><div class="tag">Manali</div><div class="tag">Dharamshala</div><div class="tag">McLeod Ganj</div>
+  <div class="tag">Kullu</div><div class="tag">Dalhousie</div><div class="tag">Kasol</div><div class="tag">Spiti Valley</div>
+  <div class="tag">Kasauli</div><div class="tag">Chail</div><div class="tag">Nainital</div><div class="tag">Mussoorie</div>
+  <div class="tag">Ranikhet</div><div class="tag">Auli</div><div class="tag">Almora</div><div class="tag">Lansdowne</div>
+  <div class="tag">Bhimtal</div><div class="tag">Kausani</div><div class="tag">Lonavala</div><div class="tag">Khandala</div>
+  <div class="tag">Mahabaleshwar</div><div class="tag">Panchgani</div><div class="tag">Matheran</div><div class="tag">Igatpuri</div>
+  <div class="tag">Bhandardara</div><div class="tag">Ooty</div><div class="tag">Kodaikanal</div><div class="tag">Yercaud</div>
+  <div class="tag">Coonoor</div><div class="tag">Munnar</div><div class="tag">Wayanad</div><div class="tag">Thekkady</div>
+  <div class="tag">Coorg</div><div class="tag">Chikmagalur</div><div class="tag">Sakleshpur</div><div class="tag">Darjeeling</div>
+  <div class="tag">Kalimpong</div><div class="tag">Kurseong</div><div class="tag">Shillong</div><div class="tag">Tawang</div>
+  <div class="tag">Gangtok</div><div class="tag">Aizawl</div><div class="tag">Srinagar</div><div class="tag">Gulmarg</div>
+  <div class="tag">Pahalgam</div><div class="tag">Leh</div><div class="tag">Mount Abu</div><div class="tag">Saputara</div>
+  <div class="tag">Araku Valley</div><div class="tag">Netarhat</div>
+</div>
+</div>
+
+<!-- ================= WILDLIFE ================= -->
+<div class="section">
+<h2>🐯 Wildlife Tourism (50+)</h2>
+<div class="grid">
+  <div class="tag">Jim Corbett National Park</div><div class="tag">Rajaji National Park</div><div class="tag">Nanda Devi National Park</div>
+  <div class="tag">Kanha National Park</div><div class="tag">Bandhavgarh National Park</div><div class="tag">Pench National Park</div>
+  <div class="tag">Satpura National Park</div><div class="tag">Panna National Park</div><div class="tag">Tadoba Tiger Reserve</div>
+  <div class="tag">Sanjay Gandhi National Park</div><div class="tag">Navegaon National Park</div><div class="tag">Chandoli National Park</div>
+  <div class="tag">Ranthambore National Park</div><div class="tag">Sariska Tiger Reserve</div><div class="tag">Keoladeo National Park</div>
+  <div class="tag">Gir National Park</div><div class="tag">Blackbuck National Park</div><div class="tag">Bandipur National Park</div>
+  <div class="tag">Nagarhole National Park</div><div class="tag">Bannerghatta National Park</div><div class="tag">Periyar Wildlife Sanctuary</div>
+  <div class="tag">Silent Valley National Park</div><div class="tag">Eravikulam National Park</div><div class="tag">Mudumalai National Park</div>
+  <div class="tag">Anamalai Tiger Reserve</div><div class="tag">Kaziranga National Park</div><div class="tag">Manas National Park</div>
+  <div class="tag">Sundarbans National Park</div><div class="tag">Jaldapara National Park</div><div class="tag">Valmiki National Park</div>
+  <div class="tag">Simlipal National Park</div><div class="tag">Bhitarkanika National Park</div><div class="tag">Great Himalayan National Park</div>
+  <div class="tag">Hemis National Park</div><div class="tag">Dachigam National Park</div><div class="tag">Namdapha National Park</div>
+  <div class="tag">Nokrek National Park</div><div class="tag">Ranganathittu Bird Sanctuary</div><div class="tag">Vedanthangal Bird Sanctuary</div>
+  <div class="tag">Sultanpur Bird Sanctuary</div><div class="tag">Chilika Lake Sanctuary</div><div class="tag">Nal Sarovar Sanctuary</div>
+</div>
+</div>
+
+<!-- ================= SPIRITUAL ================= -->
+<div class="section">
+<h2>🛕 Spiritual Tourism (50+)</h2>
+<div class="grid">
+  <div class="tag">Kashi Vishwanath Temple</div><div class="tag">Ayodhya Ram Mandir</div><div class="tag">Mathura</div><div class="tag">Vrindavan</div>
+  <div class="tag">Prayagraj</div><div class="tag">Kedarnath Temple</div><div class="tag">Badrinath Temple</div><div class="tag">Gangotri Temple</div>
+  <div class="tag">Yamunotri Temple</div><div class="tag">Haridwar</div><div class="tag">Rishikesh</div><div class="tag">Shirdi Sai Baba Temple</div>
+  <div class="tag">Siddhivinayak Temple</div><div class="tag">Trimbakeshwar Temple</div><div class="tag">Bhimashankar Temple</div><div class="tag">Grishneshwar Temple</div>
+  <div class="tag">Pandharpur</div><div class="tag">Meenakshi Temple</div><div class="tag">Rameswaram</div><div class="tag">Chidambaram Temple</div>
+  <div class="tag">Brihadeeswarar Temple</div><div class="tag">Tirupati Balaji</div><div class="tag">Srisailam</div><div class="tag">Murudeshwar Temple</div>
+  <div class="tag">Udupi Krishna Temple</div><div class="tag">Dharmasthala</div><div class="tag">Sabarimala Temple</div><div class="tag">Guruvayur Temple</div>
+  <div class="tag">Somnath Temple</div><div class="tag">Dwarkadhish Temple</div><div class="tag">Ajmer Sharif Dargah</div><div class="tag">Brahma Temple Pushkar</div>
+  <div class="tag">Golden Temple Amritsar</div><div class="tag">Lotus Temple Delhi</div><div class="tag">Akshardham Temple</div><div class="tag">Jama Masjid Delhi</div>
+  <div class="tag">Dakshineswar Kali Temple</div><div class="tag">Kalighat Temple</div><div class="tag">Mahabodhi Temple</div><div class="tag">Vaishno Devi</div>
+  <div class="tag">Amarnath Cave</div><div class="tag">Kamakhya Temple</div><div class="tag">Tawang Monastery</div><div class="tag">Velankanni Church</div>
+  <div class="tag">Bom Jesus Basilica</div><div class="tag">Mahakaleshwar Temple</div><div class="tag">Omkareshwar Temple</div><div class="tag">Hampi Temples</div>
+</div>
+</div>
+
+<!-- ================= BEACH ================= -->
+<div class="section">
+<h2>🏖️ Beach Tourism (50+)</h2>
+<div class="grid">
+  <div class="tag">Baga Beach Goa</div><div class="tag">Calangute Beach Goa</div><div class="tag">Anjuna Beach Goa</div><div class="tag">Vagator Beach Goa</div>
+  <div class="tag">Colva Beach Goa</div><div class="tag">Palolem Beach Goa</div><div class="tag">Juhu Beach Mumbai</div><div class="tag">Marine Drive Mumbai</div>
+  <div class="tag">Alibaug Beach</div><div class="tag">Kashid Beach</div><div class="tag">Tarkarli Beach</div><div class="tag">Ganpatipule Beach</div>
+  <div class="tag">Varkala Beach Kerala</div><div class="tag">Kovalam Beach Kerala</div><div class="tag">Marari Beach Kerala</div><div class="tag">Bekal Beach Kerala</div>
+  <div class="tag">Marina Beach Chennai</div><div class="tag">Mahabalipuram Beach</div><div class="tag">Rameswaram Beach</div><div class="tag">Dhanushkodi Beach</div>
+  <div class="tag">Gokarna Beach</div><div class="tag">Om Beach Gokarna</div><div class="tag">Karwar Beach</div><div class="tag">Puri Beach Odisha</div>
+  <div class="tag">Chandipur Beach</div><div class="tag">Digha Beach</div><div class="tag">Mandarmani Beach</div><div class="tag">Radhanagar Beach Andaman</div>
+  <div class="tag">Elephant Beach Andaman</div><div class="tag">Agatti Beach Lakshadweep</div><div class="tag">Bangaram Beach</div><div class="tag">Diu Beach</div>
+  <div class="tag">Mandvi Beach Gujarat</div>
+</div>
+</div>
+
+<!-- ================= ADVENTURE ================= -->
+<div class="section">
+<h2>🧗 Adventure Tourism (50+)</h2>
+<div class="grid">
+  <div class="tag">Rishikesh River Rafting</div><div class="tag">Auli Skiing</div><div class="tag">Bir Billing Paragliding</div><div class="tag">Leh Ladakh Bike Trip</div>
+  <div class="tag">Solang Valley Adventure</div><div class="tag">Spiti Valley Trek</div><div class="tag">Jaisalmer Desert Safari</div><div class="tag">Andaman Scuba Diving</div>
+  <div class="tag">Dandeli White Water Rafting</div><div class="tag">Coorg Trekking</div><div class="tag">Munnar Rock Climbing</div><div class="tag">Wayanad Zip Lining</div>
+  <div class="tag">Manali Paragliding</div><div class="tag">Kasol Trekking</div><div class="tag">Chopta Tungnath Trek</div><div class="tag">Valley of Flowers Trek</div>
+  <div class="tag">Nubra Valley Camel Safari</div><div class="tag">Pangong Lake Camping</div><div class="tag">Gulmarg Gondola</div><div class="tag">Sam Sand Dunes Camel Ride</div>
+  <div class="tag">Bikaner Camel Safari</div><div class="tag">Havelock Island Snorkeling</div><div class="tag">Neil Island Kayaking</div><div class="tag">North Bay Island Scuba</div>
+  <div class="tag">Chikmagalur Trekking</div><div class="tag">Kalsubai Peak Climbing</div><div class="tag">Rajmachi Fort Trek</div><div class="tag">Bhandardara Camping</div>
+  <div class="tag">Igatpuri Valley Crossing</div><div class="tag">Cherrapunji Caving</div><div class="tag">Dawki River Boating</div><div class="tag">Rann of Kutch ATV Ride</div>
+  <div class="tag">Saputara Paragliding</div><div class="tag">Araku Valley Trek</div><div class="tag">Hampi Bouldering</div><div class="tag">Ziro Valley Trek</div>
+  <div class="tag">Mount Abu Rock Climbing</div><div class="tag">Dzukou Valley Trek</div><div class="tag">Sandakphu Trek</div><div class="tag">Kolad River Rafting</div>
+  <div class="tag">Tirthan Valley Fishing</div><div class="tag">Gokarna Surfing</div>
+</div>
+</div>
+
+<div class="rating">
+  <span onclick="rate(1)">⭐</span>
+  <span onclick="rate(2)">⭐</span>
+  <span onclick="rate(3)">⭐</span>
+  <span onclick="rate(4)">⭐</span>
+  <span onclick="rate(5)">⭐</span>
+  <p style="font-size: 0.9rem; margin-top: 5px;">Rate your experience</p>
 </div>
 
 <footer>
-  <p>© 2025 Tourism of India | Best Travel Experiences | Book with Confidence ✨</p>
+  <p>© 2025 Tourism of India | Discover, Explore & Book Your Journey ✨</p>
 </footer>
 
 <!-- MODAL -->
-<div id="packageModal" class="modal-overlay">
+<div id="placeModal" class="modal-overlay">
   <div class="modal-container">
     <div class="modal-header">
-      <h2 id="modalTitle">Package Details</h2>
+      <h2 id="modalPlaceName">Place Name</h2>
       <button class="close-modal" id="closeModalBtn">&times;</button>
     </div>
     <div class="modal-body">
-      <img id="modalImg" class="modal-img" src="" alt="package">
-      <p id="modalDesc" class="modal-desc"></p>
-      <span id="modalDuration" class="modal-duration"></span>
-      <div class="modal-price" id="modalPrice"></div>
-      <div class="inclusion-list" id="modalInclusions"></div>
+      <img id="modalImg" class="place-detail-img" src="" alt="place image">
+      <p id="modalDesc" class="detail-desc"></p>
+      <div id="infoHighlights" class="info-grid"></div>
       <div class="booking-form">
-        <h3><i class="fas fa-calendar-check"></i> Book This Package</h3>
-        <input type="text" id="custName" placeholder="Full Name" required>
-        <input type="email" id="custEmail" placeholder="Email ID" required>
-        <input type="tel" id="custPhone" placeholder="Phone Number">
-        <input type="date" id="travelDate" required>
-        <select id="travelers">
-          <option value="1">1 Traveler</option>
-          <option value="2">2 Travelers</option>
-          <option value="3">3 Travelers</option>
-          <option value="4">4 Travelers</option>
-          <option value="5">5 Travelers</option>
-          <option value="6">6 Travelers</option>
-        </select>
-        <button class="book-btn" id="confirmBooking">✅ Confirm Booking</button>
-        <div id="bookingMsg"></div>
+        <h3><i class="fas fa-chair"></i> Book Your Seat Now</h3>
+        <form id="bookingForm">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> Full Name</label>
+            <input type="text" id="visitorName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email ID</label>
+            <input type="email" id="visitorEmail" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-ticket"></i> Number of Seats</label>
+            <select id="seatCount">
+              <option value="1">1 Seat</option>
+              <option value="2">2 Seats</option>
+              <option value="3">3 Seats</option>
+              <option value="4">4 Seats</option>
+              <option value="5">5 Seats</option>
+              <option value="6">6 Seats</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-calendar-day"></i> Travel Date</label>
+            <input type="date" id="travelDate" required>
+          </div>
+          <button type="submit" class="book-btn"><i class="fas fa-check-circle"></i> Confirm Booking</button>
+          <div id="bookingFeedback"></div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ================= PACKAGES DATABASE =================
-  const packagesData = [
-    { 
-      name: "Lonavala", 
-      price: 5000, 
-      type: "hill", 
-      days: 2, 
-      img: "https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Beautiful hill station near Mumbai with lush valleys, waterfalls, and ancient caves. Perfect weekend getaway!", 
-      inclusions: ["2 Star Hotel", "Breakfast", "Local Sightseeing", "Pickup & Drop", "Bhushi Dam Visit"] 
-    },
-    { 
-      name: "Mahabaleshwar", 
-      price: 6000, 
-      type: "hill", 
-      days: 2, 
-      img: "https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Famous for strawberry farms, scenic viewpoints, and ancient temples. Experience the beauty of Western Ghats.", 
-      inclusions: ["3 Star Hotel", "Breakfast & Dinner", "Sightseeing", "Transport", "Strawberry Farm Visit"] 
-    },
-    { 
-      name: "Mount Abu", 
-      price: 5500, 
-      type: "hill", 
-      days: 2, 
-      img: "https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Rajasthan's only hill station with Nakki Lake, Dilwara Temples, and beautiful sunset points.", 
-      inclusions: ["Hotel Stay", "Meals", "Boating", "Temple Visit", "Sunset Point"] 
-    },
-    { 
-      name: "Rishikesh", 
-      price: 5000, 
-      type: "adventure", 
-      days: 2, 
-      img: "https://images.pexels.com/photos/269583/pexels-photo-269583.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Yoga capital with Ganga rafting, camping, bungee jumping, and spiritual Ganga Aarti experience.", 
-      inclusions: ["Camping", "Rafting", "Meals", "Ganga Aarti", "Yoga Session"] 
-    },
-    { 
-      name: "Shirdi", 
-      price: 5000, 
-      type: "spiritual", 
-      days: 2, 
-      img: "https://images.pexels.com/photos/258109/pexels-photo-258109.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Famous Sai Baba temple and spiritual experience. Complete darshan package with prasad.", 
-      inclusions: ["Hotel Stay", "Darshan Pass", "Meals", "Transport", "Prasad"] 
-    },
-    { 
-      name: "Goa Budget", 
-      price: 8000, 
-      type: "beach", 
-      days: 2, 
-      img: "https://images.pexels.com/photos/1036657/pexels-photo-1036657.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Beaches, parties, and water sports. Experience the vibrant nightlife of North Goa.", 
-      inclusions: ["Beach Resort", "Breakfast", "Scooter Rental", "Water Sports", "Beach Shacks"] 
-    },
-    { 
-      name: "Manali", 
-      price: 12000, 
-      type: "hill", 
-      days: 5, 
-      img: "https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Adventure paradise with Solang Valley, Rohtang Pass, and ancient Hadimba Temple. Perfect for snow lovers!", 
-      inclusions: ["3 Star Hotel", "All Meals", "Sightseeing", "Bonfire", "Snow Activities", "River Rafting"] 
-    },
-    { 
-      name: "Shimla", 
-      price: 11000, 
-      type: "hill", 
-      days: 5, 
-      img: "https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Queen of Hills with Mall Road, The Ridge, Kufri, and Jakhoo Temple. Experience colonial charm.", 
-      inclusions: ["Heritage Hotel", "Meals", "Toy Train Ride", "Sightseeing", "Mall Road Visit"] 
-    },
-    { 
-      name: "Goa Standard", 
-      price: 15000, 
-      type: "beach", 
-      days: 5, 
-      img: "https://images.pexels.com/photos/1036657/pexels-photo-1036657.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "North & South Goa exploration with parties, churches, and Portuguese architecture.", 
-      inclusions: ["4 Star Resort", "Full Meals", "North Goa Tour", "South Goa Tour", "Water Sports", "Party Cruise"] 
-    },
-    { 
-      name: "Kashmir", 
-      price: 25000, 
-      type: "hill", 
-      days: 5, 
-      img: "https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Heaven on Earth with Dal Lake, Gulmarg Gondola, and Mughal Gardens.", 
-      inclusions: ["Houseboat Stay", "Hotel", "All Meals", "Shikara Ride", "Gulmarg Gondola", "Pahalgam Visit"] 
-    },
-    { 
-      name: "Ladakh", 
-      price: 35000, 
-      type: "adventure", 
-      days: 7, 
-      img: "https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Land of high passes, Pangong Lake, Nubra Valley, and Buddhist monasteries.", 
-      inclusions: ["Camping", "Hotel", "Royal Enfield Bike", "Permits", "All Meals", "Support Vehicle"] 
-    },
-    { 
-      name: "Andaman Tour", 
-      price: 35000, 
-      type: "beach", 
-      days: 7, 
-      img: "https://images.pexels.com/photos/1036657/pexels-photo-1036657.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Crystal clear waters, coral reefs, Havelock Island, and romantic sunsets.", 
-      inclusions: ["Resort Stay", "Ferry Transfers", "Scuba Diving", "Snorkeling", "All Meals", "Candle Light Dinner"] 
-    },
-    { 
-      name: "Char Dham Yatra", 
-      price: 40000, 
-      type: "spiritual", 
-      days: 7, 
-      img: "https://images.pexels.com/photos/258109/pexels-photo-258109.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Yamunotri, Gangotri, Kedarnath, Badrinath pilgrimage. Complete spiritual journey.", 
-      inclusions: ["Helicopter Option", "Temple Darshan", "Accommodation", "Meals", "Transport", "Puja Arrangements"] 
-    },
-    { 
-      name: "Sikkim", 
-      price: 30000, 
-      type: "tour", 
-      days: 7, 
-      img: "https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      desc: "Northeast beauty with Gangtok, Nathula Pass, Tsomgo Lake, and Buddhist monasteries.", 
-      inclusions: ["Hotel Stay", "Meals", "Nathula Pass Permit", "Tsomgo Lake", "Sightseeing", "Monastery Visit"] 
+  // Unsplash API Key
+  const UNSPLASH_ACCESS_KEY = "MISQGmBJybBv07mHdHje937k81eYD8VmiFpkBEtYSk0";
+  
+  // Image cache for faster loading
+  let imageCache = {};
+
+  // ================= PLACE CATEGORY FUNCTION =================
+  function getPlaceCategory(placeName) {
+    const name = placeName.toLowerCase();
+    if(name.includes('national park') || name.includes('wildlife') || name.includes('sanctuary') || name.includes('tiger') || name.includes('bird')) 
+      return 'wildlife';
+    if(name.includes('temple') || name.includes('mandir') || name.includes('mosque') || name.includes('church') || name.includes('gurudwara') || name.includes('dargah') || name.includes('shrine') || name.includes('ashram') || name.includes('mathura') || name.includes('vrindavan') || name.includes('haridwar') || name.includes('rishikesh') || name.includes('shirdi') || name.includes('vaishno') || name.includes('amarnath')) 
+      return 'spiritual';
+    if(name.includes('beach') || name.includes('sea') || name.includes('bay') || name.includes('coast') || name.includes('baga') || name.includes('calangute') || name.includes('goa') || name.includes('marina') || name.includes('puri')) 
+      return 'beach';
+    if(name.includes('rafting') || name.includes('trek') || name.includes('ski') || name.includes('paragliding') || name.includes('desert') || name.includes('safari') || name.includes('diving') || name.includes('camping') || name.includes('bike') || name.includes('adventure')) 
+      return 'adventure';
+    return 'hillstation';
+  }
+
+  // ================= FETCH IMAGE FROM UNSPLASH API =================
+  async function fetchPlaceImage(placeName) {
+    // Check cache first
+    if(imageCache[placeName]) {
+      return imageCache[placeName];
     }
-  ];
-
-  // ================= DATABASE FUNCTIONS =================
-  let allPackageBookings = [];
-
-  function loadPackageBookings() {
-    const saved = localStorage.getItem('tourism_package_bookings');
-    if(saved) {
-      allPackageBookings = JSON.parse(saved);
+    
+    try {
+      const response = await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(placeName)}%20india&per_page=1&client_id=${UNSPLASH_ACCESS_KEY}`);
+      const data = await response.json();
+      
+      if(data.results && data.results.length > 0) {
+        const imageUrl = data.results[0].urls.regular;
+        imageCache[placeName] = imageUrl;
+        return imageUrl;
+      }
+    } catch(error) {
+      console.error("API Error for", placeName, error);
     }
+    
+    // Fallback image if API fails
+    return "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&w=600";
   }
 
-  function savePackageBooking(booking) {
-    allPackageBookings.push(booking);
-    localStorage.setItem('tourism_package_bookings', JSON.stringify(allPackageBookings));
+  // ================= GET PLACE DETAILS WITH API IMAGE =================
+  async function getPlaceDetailsWithImage(placeName) {
+    const category = getPlaceCategory(placeName);
+    const imageUrl = await fetchPlaceImage(placeName);
+    
+    const categoryInfo = {
+      hillstation: {
+        desc: `${placeName} is a beautiful hill station in India offering stunning views, pleasant weather, and amazing trekking opportunities. Perfect for nature lovers and peace seekers.`,
+        bestTime: "March to June & September to November",
+        entryFee: "Free entry",
+        price: "₹999",
+        highlights: "Scenic views, trekking, nature walks, photography, local culture"
+      },
+      wildlife: {
+        desc: `${placeName} is a renowned wildlife destination in India, home to diverse flora and fauna including tigers, elephants, and exotic birds. A paradise for nature enthusiasts.`,
+        bestTime: "October to March",
+        entryFee: "₹100-₹200",
+        price: "₹1499",
+        highlights: "Jungle safari, bird watching, wildlife photography, nature trails"
+      },
+      spiritual: {
+        desc: `${placeName} is a sacred spiritual destination in India, attracting devotees from around the world. Experience divine energy, ancient rituals, and architectural beauty.`,
+        bestTime: "October to March",
+        entryFee: "Free - ₹100",
+        price: "₹799",
+        highlights: "Spiritual tours, aarti ceremonies, temple architecture, meditation"
+      },
+      beach: {
+        desc: `${placeName} is a stunning beach destination with golden sands, crystal clear waters, and vibrant beach life. Perfect for relaxation and water adventures.`,
+        bestTime: "October to February",
+        entryFee: "Free",
+        price: "₹1199",
+        highlights: "Swimming, water sports, sunset views, beach shacks, surfing"
+      },
+      adventure: {
+        desc: `${placeName} is an adventure hotspot offering thrilling activities like river rafting, trekking, paragliding, and more. Perfect for adrenaline junkies!`,
+        bestTime: "September to June",
+        entryFee: "Activity-based",
+        price: "₹1699",
+        highlights: "Adventure sports, trekking, camping, photography, local experiences"
+      }
+    };
+    
+    const info = categoryInfo[category];
+    return {
+      img: imageUrl,
+      desc: info.desc,
+      bestTime: info.bestTime,
+      entryFee: info.entryFee,
+      price: info.price,
+      highlights: info.highlights
+    };
   }
 
-  loadPackageBookings();
+  // ================= MODAL ELEMENTS =================
+  const modalOverlay = document.getElementById('placeModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const modalPlaceName = document.getElementById('modalPlaceName');
+  const modalImg = document.getElementById('modalImg');
+  const modalDesc = document.getElementById('modalDesc');
+  const infoHighlights = document.getElementById('infoHighlights');
+  const bookingFeedback = document.getElementById('bookingFeedback');
+  const bookingForm = document.getElementById('bookingForm');
+  let currentPlaceName = "";
+  let currentPlacePrice = 0;
 
-  let currentPackage = null;
-
-  function renderPackages() {
-    const grid = document.getElementById('packagesGrid');
-    if(!grid) return;
-    grid.innerHTML = '';
+  // ================= OPEN MODAL WITH API =================
+  async function openPlaceModal(placeName) {
+    // Show loading state
+    modalPlaceName.innerText = placeName;
+    modalImg.src = "https://via.placeholder.com/600x400?text=Loading+Image...";
+    modalDesc.innerText = "Loading place information...";
+    modalOverlay.classList.add('active');
     
-    packagesData.forEach(pkg => {
-      const card = document.createElement('div');
-      card.className = 'tag';
-      card.setAttribute('data-price', pkg.price);
-      card.setAttribute('data-type', pkg.type);
-      card.setAttribute('data-days', pkg.days);
-      card.setAttribute('data-name', pkg.name);
-      
-      const typeIcon = pkg.type === 'hill' ? '🏔️' : pkg.type === 'beach' ? '🏖️' : pkg.type === 'adventure' ? '🧗' : pkg.type === 'spiritual' ? '🛕' : '🚌';
-      
-      card.innerHTML = `
-        <img src="${pkg.img}" class="package-img" alt="${pkg.name}">
-        <div class="package-content">
-          <div class="package-title">${pkg.name}</div>
-          <div class="package-details">
-            <span><i class="fas fa-calendar"></i> ${pkg.days} Days</span>
-            <span><i class="fas fa-tag"></i> ${typeIcon} ${pkg.type}</span>
-          </div>
-          <div class="package-price">₹${pkg.price.toLocaleString()}</div>
-          <div class="package-includes"><i class="fas fa-check-circle"></i> ${pkg.inclusions[0]}</div>
-          <div class="package-rating">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-          </div>
-        </div>
-        <div class="package-badge">${pkg.price <= 8000 ? '🔥 Budget' : pkg.price >= 30000 ? '👑 Premium' : '⭐ Popular'}</div>
-      `;
-      card.addEventListener('click', () => openPackageModal(pkg.name));
-      grid.appendChild(card);
-    });
-  }
-
-  function openPackageModal(pkgName) {
-    currentPackage = packagesData.find(p => p.name === pkgName);
-    if (!currentPackage) return;
+    // Fetch place details with image
+    const placeInfo = await getPlaceDetailsWithImage(placeName);
+    currentPlaceName = placeName;
+    currentPlacePrice = parseInt(placeInfo.price.replace('₹', ''));
     
-    document.getElementById('modalTitle').innerText = currentPackage.name;
-    document.getElementById('modalImg').src = currentPackage.img;
-    document.getElementById('modalDesc').innerText = currentPackage.desc;
-    document.getElementById('modalDuration').innerHTML = `<i class="fas fa-clock"></i> ${currentPackage.days} Days / ${currentPackage.days-1} Nights`;
-    document.getElementById('modalPrice').innerHTML = `💰 ₹${currentPackage.price.toLocaleString()} per person`;
+    modalPlaceName.innerText = placeName;
+    modalImg.src = placeInfo.img;
+    modalDesc.innerText = placeInfo.desc;
     
-    const inclusionsHtml = `
-      <h4><i class="fas fa-gift"></i> Package Inclusions:</h4>
-      <ul>
-        ${currentPackage.inclusions.map(item => `<li><i class="fas fa-check-circle"></i> ${item}</li>`).join('')}
-      </ul>
+    infoHighlights.innerHTML = `
+      <div class="info-item"><i class="fas fa-calendar-alt"></i> Best Time: ${placeInfo.bestTime}</div>
+      <div class="info-item"><i class="fas fa-ticket-alt"></i> Entry: ${placeInfo.entryFee}</div>
+      <div class="info-item"><i class="fas fa-rupee-sign"></i> Price/Seat: ${placeInfo.price}</div>
+      <div class="info-item"><i class="fas fa-star"></i> Activities: ${placeInfo.highlights}</div>
     `;
-    document.getElementById('modalInclusions').innerHTML = inclusionsHtml;
+    
+    bookingForm.reset();
+    bookingFeedback.innerHTML = '';
     
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('travelDate').min = today;
-    
-    document.getElementById('packageModal').classList.add('active');
+    const dateInput = document.getElementById('travelDate');
+    if(dateInput) dateInput.min = today;
   }
 
-  function filterPackages() {
-    const searchTerm = document.getElementById('search').value.toLowerCase();
-    const budgetVal = document.getElementById('budget').value;
-    const typeVal = document.getElementById('type').value;
-    const daysVal = document.getElementById('days').value;
-    
-    const cards = document.querySelectorAll('.tag');
-    cards.forEach(card => {
-      let show = true;
-      const name = card.getAttribute('data-name').toLowerCase();
-      const price = parseInt(card.getAttribute('data-price'));
-      const pkgType = card.getAttribute('data-type');
-      const pkgDays = parseInt(card.getAttribute('data-days'));
-      
-      if (searchTerm && !name.includes(searchTerm)) show = false;
-      if (budgetVal) {
-        if (budgetVal === 'low' && !(price >= 5000 && price <= 10000)) show = false;
-        if (budgetVal === 'mid' && !(price > 10000 && price <= 20000)) show = false;
-        if (budgetVal === 'pre' && !(price > 20000 && price <= 30000)) show = false;
-        if (budgetVal === 'high' && !(price > 30000)) show = false;
-      }
-      if (typeVal && pkgType !== typeVal) show = false;
-      if (daysVal) {
-        if (daysVal === 'short' && !(pkgDays >= 1 && pkgDays <= 3)) show = false;
-        if (daysVal === 'mid' && !(pkgDays > 3 && pkgDays <= 5)) show = false;
-        if (daysVal === 'long' && !(pkgDays > 5)) show = false;
-      }
-      card.classList.toggle('hide', !show);
-    });
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    currentPlaceName = "";
   }
 
-  function handleBooking() {
-    if (!currentPackage) {
-      document.getElementById('bookingMsg').innerHTML = '<div class="error-msg">❌ Please select a package first!</div>';
+  function handleBooking(e) {
+    e.preventDefault();
+    if (!currentPlaceName) {
+      bookingFeedback.innerHTML = '<div class="error-message">❌ Error: No place selected</div>';
       return;
     }
     
-    const name = document.getElementById('custName').value.trim();
-    const email = document.getElementById('custEmail').value.trim();
-    const phone = document.getElementById('custPhone').value.trim();
-    const date = document.getElementById('travelDate').value;
-    const travelers = document.getElementById('travelers').value;
+    const visitorName = document.getElementById('visitorName').value.trim();
+    const visitorEmail = document.getElementById('visitorEmail').value.trim();
+    const seatCount = document.getElementById('seatCount').value;
+    const travelDate = document.getElementById('travelDate').value;
     
-    if (!name || !email || !date) {
-      document.getElementById('bookingMsg').innerHTML = '<div class="error-msg">❌ Please fill all required fields!</div>';
+    if (!visitorName || !visitorEmail || !travelDate) {
+      bookingFeedback.innerHTML = '<div class="error-message">❌ Please fill all fields!</div>';
+      return;
+    }
+    if (!visitorEmail.includes('@') || !visitorEmail.includes('.')) {
+      bookingFeedback.innerHTML = '<div class="error-message">❌ Enter a valid email address!</div>';
       return;
     }
     
-    if (!email.includes('@') || !email.includes('.')) {
-      document.getElementById('bookingMsg').innerHTML = '<div class="error-msg">❌ Enter a valid email address!</div>';
-      return;
-    }
+    let total = currentPlacePrice * parseInt(seatCount);
     
-    const total = currentPackage.price * parseInt(travelers);
-    
+    // ========== BOOKING SAVE TO LOCALSTORAGE ==========
     const booking = {
       id: Date.now(),
-      packageName: currentPackage.name,
-      userName: name,
-      userEmail: email,
-      userPhone: phone,
-      travelers: parseInt(travelers),
-      travelDate: date,
+      placeName: currentPlaceName,
+      userName: visitorName,
+      userEmail: visitorEmail,
+      seats: parseInt(seatCount),
+      travelDate: travelDate,
       totalAmount: total,
       bookingDate: new Date().toISOString()
     };
     
-    savePackageBooking(booking);
+    let existingBookings = JSON.parse(localStorage.getItem('tourism_bookings') || '[]');
+    existingBookings.push(booking);
+    localStorage.setItem('tourism_bookings', JSON.stringify(existingBookings));
+    // ========== BOOKING SAVE COMPLETE ==========
     
-    document.getElementById('bookingMsg').innerHTML = `
-      <div class="success-msg">
+    bookingFeedback.innerHTML = `
+      <div class="success-message">
         ✅ <strong>Booking Confirmed!</strong><br>
-        📍 ${currentPackage.name} | 👥 ${travelers} Travelers | 💰 Total: ₹${total.toLocaleString()}<br>
-        📧 Confirmation sent to ${email}<br>
+        📍 ${currentPlaceName} | 🎫 ${seatCount} seat(s) | 💰 Total: ₹${total}<br>
+        📧 Confirmation sent to ${visitorEmail}<br>
+        🗓️ Travel Date: ${travelDate}<br>
         🆔 Booking ID: #${booking.id}<br>
-        🙏 Thank you ${name}! Happy Journey with Tourism of India!
+        🙏 Thank you ${visitorName}! Happy journey with Tourism of India!
       </div>
     `;
     
-    document.getElementById('custName').value = '';
-    document.getElementById('custEmail').value = '';
-    document.getElementById('custPhone').value = '';
+    document.getElementById('visitorName').value = '';
+    document.getElementById('visitorEmail').value = '';
+    document.getElementById('seatCount').value = '1';
     document.getElementById('travelDate').value = '';
-    document.getElementById('travelers').value = '1';
     
     setTimeout(() => {
       closeModal();
-    }, 5000);
+    }, 3000);
   }
   
-  function closeModal() {
-    document.getElementById('packageModal').classList.remove('active');
-    document.getElementById('bookingMsg').innerHTML = '';
-  }
-  
-  // Event Listeners
-  const confirmBtn = document.getElementById('confirmBooking');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const searchInput = document.getElementById('search');
-  const budgetSelect = document.getElementById('budget');
-  const typeSelect = document.getElementById('type');
-  const daysSelect = document.getElementById('days');
-  
-  if(confirmBtn) confirmBtn.addEventListener('click', handleBooking);
-  if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-  if(searchInput) searchInput.addEventListener('input', filterPackages);
-  if(budgetSelect) budgetSelect.addEventListener('change', filterPackages);
-  if(typeSelect) typeSelect.addEventListener('change', filterPackages);
-  if(daysSelect) daysSelect.addEventListener('change', filterPackages);
-  
-  const modal = document.getElementById('packageModal');
-  if(modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+  // ================= CLICK LISTENERS =================
+  const allTags = document.querySelectorAll('.tag');
+  allTags.forEach(tag => {
+    tag.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const placeName = tag.innerText.trim();
+      openPlaceModal(placeName);
     });
-  }
-  
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-      closeModal();
-    }
   });
   
-  // Initialize
-  renderPackages();
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+  });
+  
+  if (bookingForm) bookingForm.addEventListener('submit', handleBooking);
+  
+  window.rate = function(rating) {
+    alert(`Thank you for rating ${rating} stars! 🌟 Your feedback helps us improve.`);
+  };
 </script>
 </body>
 </html>
