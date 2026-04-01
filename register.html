@@ -50,10 +50,23 @@
     background: #1a472a;
     padding: 12px 30px;
     display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .user-bar .logo-small {
+    color: #ffd966;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .user-bar .logo-small i {
+    color: #ffb347;
+  }
+  .user-bar .user-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
   }
   .user-bar .welcome {
     color: #ffebc2;
@@ -64,6 +77,7 @@
     text-decoration: none;
     font-weight: 600;
     transition: 0.3s;
+    cursor: pointer;
   }
   .user-bar a:hover {
     color: #ff8c00;
@@ -87,7 +101,7 @@
     overflow: hidden;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     backdrop-filter: blur(10px);
-    margin-top: 70px;
+    margin-top: 80px;
   }
 
   /* Left Side - Info Section */
@@ -336,12 +350,43 @@
     display: block;
   }
 
+  /* Already Logged In Message */
+  .already-logged {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f4ea;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+  }
+  .already-logged i {
+    font-size: 3rem;
+    color: #ffb347;
+    margin-bottom: 1rem;
+  }
+  .already-logged h3 {
+    color: #1a472a;
+    margin-bottom: 0.5rem;
+  }
+  .already-logged p {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  .already-logged .btn-home {
+    background: #ffb347;
+    color: #1a472a;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .auth-container {
       flex-direction: column;
       width: 95%;
-      margin-top: 80px;
+      margin-top: 100px;
     }
     .info-section, .form-section {
       width: 100%;
@@ -356,6 +401,13 @@
     }
     .user-bar {
       padding: 8px 15px;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+    .user-bar .user-controls {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 </style>
@@ -364,8 +416,14 @@
 
 <!-- User Bar - Shows login status -->
 <div class="user-bar" id="userBar">
-  <span class="welcome" id="welcomeMsg"></span>
-  <a href="#" id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutUser()">🚪 Logout</a>
+  <div class="logo-small">
+    <i class="fas fa-map-marked-alt"></i> Tourism of India
+  </div>
+  <div class="user-controls">
+    <span class="welcome" id="welcomeMsg"></span>
+    <a href="index.html" id="homeLink">🏠 Home</a>
+    <a href="#" id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutUser()">🚪 Logout</a>
+  </div>
 </div>
 
 <div class="auth-container">
@@ -383,87 +441,97 @@
   </div>
 
   <!-- Right Side Forms -->
-  <div class="form-section">
-    <div class="form-header">
-      <h3>Welcome to Tourism of India</h3>
-      <p>Login or Register to start your journey</p>
+  <div class="form-section" id="formSection">
+    <div id="loggedInMessage" style="display:none;" class="already-logged">
+      <i class="fas fa-check-circle"></i>
+      <h3>You are already logged in!</h3>
+      <p id="loggedInUserName"></p>
+      <a href="index.html" class="btn-home">Go to Homepage</a>
+      <button onclick="logoutUser()" style="margin-top: 10px; background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 30px; cursor: pointer;">Logout Instead</button>
     </div>
+    
+    <div id="loginRegisterForms">
+      <div class="form-header">
+        <h3>Welcome to Tourism of India</h3>
+        <p>Login or Register to start your journey</p>
+      </div>
 
-    <!-- Tabs -->
-    <div class="form-tabs">
-      <button class="tab-btn active" onclick="showForm('login')">Login</button>
-      <button class="tab-btn" onclick="showForm('register')">Register</button>
+      <!-- Tabs -->
+      <div class="form-tabs">
+        <button class="tab-btn active" onclick="showForm('login')">Login</button>
+        <button class="tab-btn" onclick="showForm('register')">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm" class="form active">
+        <form onsubmit="return false;">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+          </div>
+          <button type="button" class="btn-submit" onclick="handleLogin()">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+          <div class="social-login">
+            <p>Or login with</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-google"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-apple"></i></a>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div id="registerForm" class="form">
+        <form onsubmit="return false;">
+          <div class="input-group fullname-group">
+            <div>
+              <i class="fas fa-user"></i>
+              <input type="text" id="regFirstName" placeholder="First Name" required>
+            </div>
+            <div>
+              <i class="fas fa-user"></i>
+              <input type="text" id="regLastName" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="regEmail" placeholder="Email Address" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="tel" id="regPhone" placeholder="Phone Number (Optional)">
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="regPassword" placeholder="Password" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-check-circle"></i>
+            <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+          </div>
+          <button type="button" class="btn-submit" onclick="handleRegister()">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+          <div class="social-login">
+            <p>Or sign up with</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-google"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-apple"></i></a>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="messageBox" class="message"></div>
     </div>
-
-    <!-- Login Form -->
-    <div id="loginForm" class="form active">
-      <form onsubmit="return false;">
-        <div class="input-group">
-          <i class="fas fa-envelope"></i>
-          <input type="email" id="loginEmail" placeholder="Email Address" required>
-        </div>
-        <div class="input-group">
-          <i class="fas fa-lock"></i>
-          <input type="password" id="loginPassword" placeholder="Password" required>
-        </div>
-        <button type="button" class="btn-submit" onclick="handleLogin()">
-          <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-        <div class="social-login">
-          <p>Or login with</p>
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-google"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-apple"></i></a>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <!-- Register Form -->
-    <div id="registerForm" class="form">
-      <form onsubmit="return false;">
-        <div class="input-group fullname-group">
-          <div>
-            <i class="fas fa-user"></i>
-            <input type="text" id="regFirstName" placeholder="First Name" required>
-          </div>
-          <div>
-            <i class="fas fa-user"></i>
-            <input type="text" id="regLastName" placeholder="Last Name" required>
-          </div>
-        </div>
-        <div class="input-group">
-          <i class="fas fa-envelope"></i>
-          <input type="email" id="regEmail" placeholder="Email Address" required>
-        </div>
-        <div class="input-group">
-          <i class="fas fa-phone"></i>
-          <input type="tel" id="regPhone" placeholder="Phone Number (Optional)">
-        </div>
-        <div class="input-group">
-          <i class="fas fa-lock"></i>
-          <input type="password" id="regPassword" placeholder="Password" required>
-        </div>
-        <div class="input-group">
-          <i class="fas fa-check-circle"></i>
-          <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
-        </div>
-        <button type="button" class="btn-submit" onclick="handleRegister()">
-          <i class="fas fa-user-plus"></i> Create Account
-        </button>
-        <div class="social-login">
-          <p>Or sign up with</p>
-          <div class="social-icons">
-            <a href="#"><i class="fab fa-google"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-apple"></i></a>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div id="messageBox" class="message"></div>
   </div>
 </div>
 
@@ -508,15 +576,30 @@
     if(currentUser) {
       welcomeMsg.innerHTML = `👋 Welcome, ${currentUser.name}!`;
       logoutBtn.style.display = 'inline';
-      // If already logged in and on register page, redirect to home after 1 second
-      if(window.location.pathname.includes('register.html')) {
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 500);
-      }
     } else {
       welcomeMsg.innerHTML = `🔐 Not Logged In`;
       logoutBtn.style.display = 'none';
+    }
+  }
+
+  // Check login status and show appropriate content
+  function checkLoginStatus() {
+    const currentUser = getCurrentUser();
+    const loggedInMessageDiv = document.getElementById('loggedInMessage');
+    const formsDiv = document.getElementById('loginRegisterForms');
+    const loggedInUserNameSpan = document.getElementById('loggedInUserName');
+    
+    if(currentUser) {
+      // User is logged in - show message instead of forms
+      loggedInMessageDiv.style.display = 'block';
+      formsDiv.style.display = 'none';
+      if(loggedInUserNameSpan) {
+        loggedInUserNameSpan.innerHTML = `Logged in as: <strong>${currentUser.name}</strong> (${currentUser.email})`;
+      }
+    } else {
+      // User is not logged in - show forms
+      loggedInMessageDiv.style.display = 'none';
+      formsDiv.style.display = 'block';
     }
   }
 
@@ -524,10 +607,11 @@
   function logoutUser() {
     localStorage.removeItem('current_user');
     updateUserBar();
-    showMessage('✅ Logged out successfully!', 'success');
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    checkLoginStatus(); // Refresh the view
+    showMessage('✅ Logged out successfully! You can now login again.', 'success');
+    // Reset forms
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
   }
 
   // Show form (Login/Register)
@@ -557,7 +641,7 @@
     msgBox.className = `message ${type}`;
     setTimeout(() => {
       msgBox.className = 'message';
-    }, 3000);
+    }, 4000);
   }
 
   function hideMessage() {
@@ -664,26 +748,10 @@
     }
   }
 
-  // Check if already logged in
-  function checkLoggedIn() {
-    const currentUser = getCurrentUser();
-    if(currentUser && window.location.pathname.includes('register.html')) {
-      // Show message and redirect after 2 seconds
-      const msgBox = document.getElementById('messageBox');
-      if(msgBox) {
-        msgBox.innerHTML = `<div class="message success">✅ You are already logged in as ${currentUser.name}. Redirecting to home page...</div>`;
-        msgBox.className = 'message success';
-      }
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 2000);
-    }
-  }
-
   // Initialize
   loadUsers();
   updateUserBar();
-  checkLoggedIn();
+  checkLoginStatus();
 </script>
 </body>
 </html>
